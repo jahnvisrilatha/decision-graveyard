@@ -1,0 +1,964 @@
+{
+  "company": "NovaTech",
+  "historical_decisions": [
+    {
+  "decision_id": "D001",
+  "date": "2024-03-15",
+  "title": "Employee Mobile Application",
+  "category": "Product",
+  "status": "Abandoned",
+  "business_problem": "Employees wanted easier access to attendance, leave requests, and company notifications while working remotely.",
+  "context": {
+    "employees": 2000,
+    "mobile_adoption": "18%",
+    "engineering_team_size": 5,
+    "existing_solution": "Web-based employee portal",
+    "technical_environment": "Web application with limited mobile optimization"
+  },
+  "proposal": "Build native Android and iOS applications for employees with attendance, leave management, notifications, and employee profile features.",
+  "alternatives_considered": [
+    "Improve the existing web application",
+    "Build a Progressive Web Application",
+    "Build native Android and iOS applications"
+  ],
+  "chosen_option": "Build native Android and iOS applications",
+  "reasoning": [
+    "Mobile applications would provide a better experience for employees using smartphones.",
+    "Push notifications could improve communication.",
+    "Native applications could provide better access to device capabilities."
+  ],
+  "expected_outcome": "Increase employee engagement with the company's digital services and reduce dependence on desktop access.",
+  "actual_outcome": "The project was abandoned after the initial development phase.",
+  "failure_reasons": [
+    "Only 18% of employees regularly used mobile devices for company tasks.",
+    "The engineering team had only five developers.",
+    "Maintaining separate Android and iOS applications created significant development overhead.",
+    "The existing web portal already supported most required employee workflows.",
+    "Expected adoption did not justify the additional maintenance cost."
+  ],
+  "constraints": [
+    "Small engineering team",
+    "Limited development budget",
+    "Low employee mobile adoption",
+    "Existing web application already available"
+  ],
+  "lesson_learned": "A native mobile application should not be built when target user adoption is low and the existing web platform already satisfies most of the required workflow.",
+  "related_decisions": [
+  "D006",
+  "D009"
+]
+},
+{
+  "decision_id": "D002",
+  "date": "2024-07-10",
+  "title": "Microservices Migration",
+  "category": "Engineering",
+  "status": "Abandoned",
+
+  "business_problem": "NovaTech's monolithic backend was becoming difficult to scale and deploy as the number of products and engineering teams increased.",
+
+  "context": {
+    "employees": 2000,
+    "engineering_team_size": 5,
+    "backend_architecture": "Monolithic application",
+    "devops_maturity": "Low",
+    "deployment_process": "Mostly manual",
+    "monitoring": "Limited centralized monitoring"
+  },
+
+  "proposal": "Migrate the existing monolithic backend into multiple independent microservices so that individual services could be developed, deployed, and scaled independently.",
+
+  "alternatives_considered": [
+    "Continue with the existing monolithic architecture",
+    "Gradually modularize the monolith",
+    "Migrate the complete backend to microservices"
+  ],
+
+  "chosen_option": "Migrate the complete backend to microservices",
+
+  "reasoning": [
+    "Independent services could be scaled separately.",
+    "Different engineering teams could work on different services.",
+    "Individual services could potentially be deployed without redeploying the entire application.",
+    "The architecture could support future product growth."
+  ],
+
+  "expected_outcome": "Improve scalability, deployment flexibility, and development team independence.",
+
+  "actual_outcome": "The migration was abandoned after the team encountered significant operational and development complexity.",
+
+  "failure_reasons": [
+    "The engineering team had limited experience with distributed systems.",
+    "DevOps maturity was too low to reliably manage multiple services.",
+    "The deployment pipeline was not sufficiently automated.",
+    "Centralized monitoring and observability were limited.",
+    "Managing service-to-service communication introduced additional complexity.",
+    "The operational overhead was too high for the size of the engineering team."
+  ],
+
+  "constraints": [
+    "Small engineering team",
+    "Low DevOps maturity",
+    "Limited distributed-systems experience",
+    "Manual deployment processes",
+    "Limited monitoring infrastructure"
+  ],
+
+  "lesson_learned": "Microservices should not be adopted only for architectural scalability. NovaTech needs sufficient engineering capacity, DevOps maturity, automated deployment, monitoring, and distributed-systems expertise before taking on a large microservices migration.",
+
+  "related_decisions": [
+    "D008"
+  ]
+},
+{
+  "decision_id": "D003",
+  "date": "2024-09-05",
+  "title": "Vendor X Customer Support",
+  "category": "Operations",
+  "status": "Abandoned",
+
+  "business_problem": "NovaTech's internal customer support team was struggling to handle increasing customer volume while maintaining reasonable response times.",
+
+  "context": {
+    "customer_base": 12000,
+    "support_team_size": 8,
+    "average_monthly_support_tickets": 4500,
+    "support_hours": "Business hours",
+    "customer_satisfaction": "Moderate"
+  },
+
+  "proposal": "Outsource first-level customer support operations to Vendor X to reduce internal workload, extend support coverage, and handle increasing customer ticket volume.",
+
+  "alternatives_considered": [
+    "Expand the internal customer support team",
+    "Improve the existing internal support process",
+    "Outsource customer support to Vendor X",
+    "Use automation for frequently asked questions"
+  ],
+
+  "chosen_option": "Outsource first-level customer support to Vendor X",
+
+  "reasoning": [
+    "Vendor X could provide support coverage beyond NovaTech's existing business hours.",
+    "Outsourcing could reduce the workload on NovaTech's internal support team.",
+    "The vendor claimed that it could handle a larger volume of customer requests.",
+    "NovaTech expected outsourcing to reduce support costs."
+  ],
+
+  "expected_outcome": "Reduce internal support workload, improve response-time coverage, and lower customer support operating costs.",
+
+  "actual_outcome": "The outsourcing arrangement was abandoned after several months because support quality and customer satisfaction did not meet expectations.",
+
+  "failure_reasons": [
+    "Vendor agents had insufficient knowledge of NovaTech's products.",
+    "Customers received inconsistent responses to technical questions.",
+    "Escalation of complex issues to NovaTech's internal team was slow.",
+    "Customer satisfaction declined during the outsourcing period.",
+    "The internal team still needed to spend significant time correcting or reviewing vendor responses."
+  ],
+
+  "constraints": [
+    "Limited vendor knowledge of NovaTech products",
+    "Complex technical support requirements",
+    "Slow escalation process",
+    "Limited internal capacity to supervise the vendor",
+    "Customer satisfaction requirements"
+  ],
+
+  "lesson_learned": "Customer support should not be outsourced solely to reduce operating costs. Any future outsourcing initiative should evaluate product knowledge, escalation processes, quality controls, and the internal effort required to manage the vendor.",
+
+  "related_decisions": [
+    "D007"
+  ]
+},
+{
+  "decision_id": "D004",
+  "date": "2024-11-20",
+  "title": "Subscription Pricing Model",
+  "category": "Business Strategy",
+  "status": "Failed",
+
+  "business_problem": "NovaTech wanted to make its revenue more predictable and simplify billing for its growing customer base.",
+
+  "context": {
+    "customer_base": 12000,
+    "existing_pricing_model": "Usage-based pricing",
+    "customer_segments": [
+      "Small businesses",
+      "Medium businesses",
+      "Large enterprises"
+    ],
+    "average_monthly_revenue": 850000
+  },
+
+  "proposal": "Replace the existing usage-based pricing model with a fixed monthly subscription model for all customers.",
+
+  "alternatives_considered": [
+    "Continue with usage-based pricing",
+    "Introduce optional subscription plans",
+    "Create separate pricing models for different customer segments",
+    "Replace usage-based pricing with a single fixed monthly subscription"
+  ],
+
+  "chosen_option": "Replace the existing usage-based pricing model with a fixed monthly subscription model",
+
+  "reasoning": [
+    "Subscription pricing would make monthly revenue more predictable.",
+    "A fixed monthly price would simplify billing.",
+    "Customers would have clearer and more predictable costs.",
+    "The company expected subscriptions to improve long-term customer retention."
+  ],
+
+  "expected_outcome": "Increase revenue predictability, simplify billing, and improve customer retention.",
+
+  "actual_outcome": "The subscription pricing model resulted in increased cancellations among smaller customers and did not produce the expected improvement in revenue.",
+
+  "failure_reasons": [
+    "Smaller customers felt the fixed subscription price was too high compared with their actual usage.",
+    "Customers with low usage had less incentive to remain subscribed.",
+    "The same pricing structure was applied to customers with very different usage patterns.",
+    "Some customers preferred paying only when they actively used the product.",
+    "Customer cancellations increased after the pricing change."
+  ],
+
+  "constraints": [
+    "Large differences in customer usage",
+    "Price sensitivity among small customers",
+    "Single pricing structure for different customer segments",
+    "Customer preference for usage-based billing"
+  ],
+
+  "lesson_learned": "Pricing changes should account for differences in customer usage and willingness to pay. A single subscription model may not be appropriate for customers with significantly different usage patterns.",
+
+  "related_decisions": [
+    "D015"
+  ]
+},
+{
+  "decision_id": "D005",
+  "date": "2025-02-12",
+  "title": "Internal Analytics Dashboard",
+  "category": "Productivity",
+  "status": "Successful",
+
+  "business_problem": "NovaTech's product and operations teams were spending significant time collecting data from multiple systems and manually preparing reports.",
+
+  "context": {
+    "employees": 2500,
+    "primary_users": [
+      "Product managers",
+      "Operations managers",
+      "Business analysts"
+    ],
+    "data_sources": [
+      "Sales system",
+      "Customer database",
+      "Product analytics platform"
+    ],
+    "existing_reporting_process": "Manual spreadsheet-based reporting",
+    "reporting_frequency": "Weekly"
+  },
+
+  "proposal": "Build a centralized internal analytics dashboard that combines important business and product metrics into a single interface.",
+
+  "alternatives_considered": [
+    "Continue with manual spreadsheet-based reporting",
+    "Create separate reports for each department",
+    "Build a centralized internal analytics dashboard",
+    "Purchase an external business intelligence platform"
+  ],
+
+  "chosen_option": "Build a centralized internal analytics dashboard",
+
+  "reasoning": [
+    "A centralized dashboard would reduce repetitive manual reporting work.",
+    "Product and operations teams needed access to the same business metrics.",
+    "A single dashboard would provide a consistent view of important metrics.",
+    "The internal engineering team could build and maintain the dashboard using existing infrastructure."
+  ],
+
+  "expected_outcome": "Reduce the time spent preparing reports and provide product and operations teams with faster access to reliable business information.",
+
+  "actual_outcome": "The dashboard was successfully deployed and adopted by product and operations teams. Weekly reporting time was significantly reduced.",
+
+  "success_factors": [
+    "Clear and well-defined business requirements",
+    "Clearly identified users",
+    "Limited initial scope",
+    "Existing data infrastructure could be reused",
+    "Dedicated team ownership",
+    "Regular feedback from dashboard users"
+  ],
+
+  "constraints": [
+    "Limited engineering capacity",
+    "Multiple data sources",
+    "Existing legacy systems",
+    "Need for consistent data definitions"
+  ],
+
+  "lesson_learned": "Internal analytics projects are more likely to succeed when they have clearly identified users, a focused scope, reliable data sources, and clear ownership for ongoing maintenance.",
+
+  "related_decisions": [
+    "D013"
+  ]
+},
+{
+  "decision_id": "D006",
+  "date": "2025-05-18",
+  "title": "Progressive Web Application",
+  "category": "Product",
+  "status": "Successful",
+
+  "business_problem": "Employees needed a better mobile experience for accessing attendance, leave management, notifications, and other employee services.",
+
+  "context": {
+    "employees": 2500,
+    "mobile_adoption": "42%",
+    "engineering_team_size": 8,
+    "existing_solution": "Web-based employee portal",
+    "previous_related_decision": "D001 - Employee Mobile Application",
+    "technical_environment": "Existing web application with responsive design capabilities"
+  },
+
+  "proposal": "Improve the existing employee web platform and convert it into a Progressive Web Application that provides a mobile-friendly experience without maintaining separate native Android and iOS applications.",
+
+  "alternatives_considered": [
+    "Build a new native Android and iOS application",
+    "Continue using the existing web application without major changes",
+    "Improve the existing web application and convert it into a Progressive Web Application"
+  ],
+
+  "chosen_option": "Improve the existing web application and convert it into a Progressive Web Application",
+
+  "reasoning": [
+    "The company could reuse its existing web application and infrastructure.",
+    "A single codebase would reduce development and maintenance overhead.",
+    "The PWA could provide a better mobile experience without requiring separate Android and iOS applications.",
+    "The approach required fewer engineering resources than building native applications.",
+    "The company could gradually improve the mobile experience based on employee feedback."
+  ],
+
+  "expected_outcome": "Improve employee mobile access while reducing the development and maintenance costs associated with separate native mobile applications.",
+
+  "actual_outcome": "The Progressive Web Application was successfully deployed and adoption increased among employees using mobile devices.",
+
+  "success_factors": [
+    "Existing web infrastructure could be reused",
+    "Single codebase reduced maintenance overhead",
+    "Mobile experience was improved incrementally",
+    "Engineering requirements were manageable",
+    "The solution addressed the main employee need without building separate native applications"
+  ],
+
+  "constraints": [
+    "Limited engineering resources",
+    "Existing web application architecture",
+    "Need to support both desktop and mobile users",
+    "Need to maintain compatibility with existing employee workflows"
+  ],
+
+  "lesson_learned": "When the underlying business problem is valid but a previous implementation approach was too costly or complex, the organization should consider whether a simpler implementation can solve the same problem while addressing the original constraints.",
+
+  "related_decisions": [
+    "D001",
+    "D009"
+  ]
+},
+{
+  "decision_id": "D007",
+  "date": "2025-08-22",
+  "title": "Outsource Customer Support",
+  "category": "Operations",
+  "status": "Failed",
+
+  "business_problem": "NovaTech's customer support volume continued to increase, creating pressure on the internal support team and increasing the cost of providing timely customer service.",
+
+  "context": {
+    "customer_base": 15000,
+    "support_team_size": 10,
+    "average_monthly_support_tickets": 6200,
+    "support_hours": "Business hours",
+    "previous_related_decision": "D003 - Vendor X Customer Support",
+    "customer_satisfaction": "Moderate"
+  },
+
+  "proposal": "Outsource a larger portion of customer support operations to an external service provider while keeping a small internal team for complex technical issues and escalations.",
+
+  "alternatives_considered": [
+    "Continue expanding the internal customer support team",
+    "Automate frequently asked customer questions",
+    "Outsource a larger portion of customer support",
+    "Use a hybrid model with internal and external support teams"
+  ],
+
+  "chosen_option": "Outsource a larger portion of customer support while keeping a small internal escalation team",
+
+  "reasoning": [
+    "The external provider could handle a larger volume of customer requests.",
+    "Outsourcing could provide extended support coverage.",
+    "The internal team could focus on complex technical issues.",
+    "A hybrid model was expected to reduce operational costs while maintaining service quality."
+  ],
+
+  "expected_outcome": "Reduce the workload on NovaTech's internal support team, improve support coverage, and reduce customer support operating costs.",
+
+  "actual_outcome": "The outsourcing initiative did not achieve the expected cost reduction or customer satisfaction improvements and was eventually scaled back.",
+
+  "failure_reasons": [
+    "External agents still required significant product-specific training.",
+    "Complex customer issues frequently required escalation to NovaTech's internal team.",
+    "The internal team spent substantial time reviewing and correcting external responses.",
+    "Support quality varied between external agents.",
+    "The expected cost savings were reduced by training, supervision, and quality-control requirements."
+  ],
+
+  "constraints": [
+    "Complex product-specific support requirements",
+    "Need for technical escalation",
+    "Training requirements for external agents",
+    "Limited internal capacity for vendor management",
+    "Customer satisfaction requirements"
+  ],
+
+  "lesson_learned": "Outsourcing customer support does not automatically reduce costs or improve service quality. Future outsourcing proposals should evaluate the complexity of support requests, training requirements, escalation workload, quality-control costs, and the effort required to manage the external provider.",
+
+  "related_decisions": [
+    "D003"
+  ]
+},
+{
+  "decision_id": "D008",
+  "date": "2025-10-15",
+  "title": "Kubernetes Migration",
+  "category": "Infrastructure",
+  "status": "Successful",
+
+  "business_problem": "NovaTech needed a more reliable way to deploy, scale, and manage its growing number of containerized applications.",
+
+  "context": {
+    "employees": 3500,
+    "engineering_team_size": 12,
+    "devops_maturity": "High",
+    "deployment_process": "Automated CI/CD",
+    "monitoring": "Centralized monitoring and observability",
+    "container_usage": "Growing",
+    "previous_related_decision": "D002 - Microservices Migration"
+  },
+
+  "proposal": "Adopt Kubernetes as the standard platform for deploying and managing containerized applications across NovaTech's infrastructure.",
+
+  "alternatives_considered": [
+    "Continue managing containers manually",
+    "Use a simpler managed container platform",
+    "Adopt Kubernetes for container orchestration"
+  ],
+
+  "chosen_option": "Adopt Kubernetes for container orchestration",
+
+  "reasoning": [
+    "Kubernetes could automate deployment and scaling of containerized workloads.",
+    "The engineering team had developed sufficient container and DevOps expertise.",
+    "Automated CI/CD pipelines were already available.",
+    "Centralized monitoring and observability had been established.",
+    "The growing number of containerized applications justified a dedicated orchestration platform."
+  ],
+
+  "expected_outcome": "Improve deployment reliability, simplify container management, and provide scalable infrastructure for NovaTech's growing applications.",
+
+  "actual_outcome": "The Kubernetes migration was successfully completed and became the standard deployment platform for several production workloads.",
+
+  "success_factors": [
+    "Larger and more experienced engineering team",
+    "High DevOps maturity",
+    "Automated CI/CD pipelines",
+    "Centralized monitoring and observability",
+    "Existing containerization experience",
+    "Gradual migration instead of a complete infrastructure replacement"
+  ],
+
+  "constraints": [
+    "Migration required engineering training",
+    "Existing applications had different deployment requirements",
+    "Infrastructure migration needed to avoid production disruption",
+    "Operational complexity had to be carefully managed"
+  ],
+
+  "lesson_learned": "Infrastructure technologies should be evaluated against the organization's current capabilities and operational maturity. A technology that was previously too complex may become appropriate after the organization develops the required expertise, automation, and supporting infrastructure.",
+
+  "related_decisions": [
+    "D002"
+  ]
+},
+{
+  "decision_id": "D009",
+  "date": "2025-12-10",
+  "title": "Employee Self-Service Portal",
+  "category": "Product",
+  "status": "Successful",
+
+  "business_problem": "Employees were depending on HR staff for routine tasks such as leave requests, attendance information, document access, and updating personal information.",
+
+  "context": {
+    "employees": 3500,
+    "hr_team_size": 12,
+    "existing_solution": "Web-based employee portal",
+    "common_employee_requests": [
+      "Leave requests",
+      "Attendance information",
+      "Employee document access",
+      "Personal information updates"
+    ],
+    "previous_related_decisions": [
+      "D001 - Employee Mobile Application",
+      "D006 - Progressive Web Application"
+    ]
+  },
+
+  "proposal": "Create an employee self-service portal that allows employees to complete common HR and administrative tasks without requiring direct assistance from HR staff.",
+
+  "alternatives_considered": [
+    "Continue handling employee requests manually through HR",
+    "Build a separate native mobile application",
+    "Expand the existing web platform with employee self-service features",
+    "Purchase a separate employee management platform"
+  ],
+
+  "chosen_option": "Expand the existing web platform with employee self-service features",
+
+  "reasoning": [
+    "The existing web platform could be reused instead of building a completely new system.",
+    "Employees already knew how to access the existing portal.",
+    "The most common HR requests could be digitized incrementally.",
+    "The approach required fewer engineering resources than building a separate application.",
+    "Automating routine requests could reduce the workload on the HR team."
+  ],
+
+  "expected_outcome": "Reduce routine HR workload, give employees faster access to information and services, and improve the overall employee experience.",
+
+  "actual_outcome": "The employee self-service portal was successfully deployed and became the primary channel for several routine employee requests.",
+
+  "success_factors": [
+    "Focused on frequently requested employee services",
+    "Reused existing web infrastructure",
+    "Employees were already familiar with the existing portal",
+    "Features were introduced incrementally",
+    "HR and employees provided feedback during development"
+  ],
+
+  "constraints": [
+    "Existing web application architecture",
+    "Limited engineering capacity",
+    "Need to integrate with existing HR systems",
+    "Need to protect employee information",
+    "Different departments had different employee workflows"
+  ],
+
+  "lesson_learned": "When employees already use an existing platform, expanding that platform with high-value self-service features can be more practical than creating a separate application. Future proposals should first evaluate whether existing systems can be extended to solve the problem.",
+
+  "related_decisions": [
+    "D001",
+    "D006"
+  ]
+},
+{
+  "decision_id": "D010",
+  "date": "2026-01-20",
+  "title": "AI Recommendation Engine",
+  "category": "Artificial Intelligence",
+  "status": "Rejected",
+
+  "business_problem": "NovaTech wanted to increase customer engagement by providing personalized product and feature recommendations based on customer behavior.",
+
+  "context": {
+    "customer_base": 18000,
+    "available_customer_history": "Limited",
+    "historical_purchase_data": "Incomplete",
+    "engineering_team_size": 15,
+    "machine_learning_team_size": 2,
+    "existing_recommendation_system": "None"
+  },
+
+  "proposal": "Build an AI-powered recommendation engine that analyzes customer behavior and recommends relevant products, features, and services.",
+
+  "alternatives_considered": [
+    "Continue with existing non-personalized product suggestions",
+    "Improve rule-based recommendations",
+    "Build an AI-powered recommendation engine",
+    "Collect more customer behavioral data before developing a recommendation system"
+  ],
+
+  "chosen_option": "Reject the AI recommendation engine proposal and improve data collection before reconsidering the idea.",
+
+  "reasoning": [
+    "The available historical customer data was insufficient for reliable personalized recommendations.",
+    "Customer behavioral data was incomplete across several product areas.",
+    "The expected improvement in customer engagement could not be estimated reliably.",
+    "Developing and operating the recommendation system would require additional infrastructure and machine learning resources.",
+    "The team could not define a sufficiently clear return on investment."
+  ],
+
+  "expected_outcome": "Avoid investing significant engineering and infrastructure resources in an AI system before sufficient data and a measurable business case are available.",
+
+  "actual_outcome": "The AI recommendation engine was not developed. NovaTech instead prioritized improving customer data collection and evaluating simpler rule-based recommendation approaches.",
+
+  "rejection_reasons": [
+    "Insufficient historical customer behavior data",
+    "Incomplete customer activity data",
+    "Unclear expected business impact",
+    "High development and infrastructure requirements",
+    "Limited machine learning team capacity",
+    "No clearly defined return on investment"
+  ],
+
+  "constraints": [
+    "Limited customer behavioral data",
+    "Incomplete data across product areas",
+    "Small machine learning team",
+    "Uncertain business value",
+    "Limited infrastructure budget"
+  ],
+
+  "lesson_learned": "AI initiatives should be supported by sufficient high-quality data, a clearly defined business problem, measurable success criteria, and a reasonable expected return on investment before significant development resources are committed.",
+
+  "related_decisions": [
+    "D011"
+  ]
+},
+{
+  "decision_id": "D011",
+  "date": "2026-03-15",
+  "title": "Real-Time Notification System",
+  "category": "Product",
+  "status": "Successful",
+
+  "business_problem": "NovaTech's employees and customers were sometimes missing important updates because different applications used separate and inconsistent notification mechanisms.",
+
+  "context": {
+    "employees": 4000,
+    "customers": 18000,
+    "existing_notification_system": "Application-specific notifications",
+    "notification_channels": [
+      "Email",
+      "Web notifications"
+    ],
+    "average_daily_notifications": 25000
+  },
+
+  "proposal": "Build a centralized real-time notification system that allows NovaTech applications to send important notifications through a common notification service.",
+
+  "alternatives_considered": [
+    "Continue maintaining separate notification systems for each application",
+    "Increase the frequency of email notifications",
+    "Build a centralized real-time notification service",
+    "Use a third-party notification platform"
+  ],
+
+  "chosen_option": "Build a centralized real-time notification service",
+
+  "reasoning": [
+    "A centralized service would provide a consistent notification mechanism across applications.",
+    "Applications could use a common notification API instead of implementing notification logic independently.",
+    "The system could support multiple notification types and channels.",
+    "Centralized monitoring would make notification failures easier to detect.",
+    "The existing engineering team had sufficient experience to build and maintain the service."
+  ],
+
+  "expected_outcome": "Improve the reliability and consistency of important notifications while reducing duplicated notification logic across NovaTech applications.",
+
+  "actual_outcome": "The centralized notification system was successfully deployed and adopted by multiple NovaTech applications.",
+
+  "success_factors": [
+    "Clear and well-defined notification requirements",
+    "Centralized notification architecture",
+    "Reusable API for multiple applications",
+    "Centralized monitoring",
+    "Existing engineering expertise",
+    "Gradual integration with existing applications"
+  ],
+
+  "constraints": [
+    "Large notification volume",
+    "Different applications had different notification requirements",
+    "Notification delivery needed to be reliable",
+    "Existing applications had to be migrated gradually",
+    "Notification failures needed to be monitored"
+  ],
+
+  "lesson_learned": "Shared infrastructure can reduce duplication when multiple applications have the same underlying requirement. Future proposals should consider whether a centralized service can provide a reusable solution instead of implementing the same capability independently in multiple applications.",
+
+  "related_decisions": [
+    "D001",
+    "D006",
+    "D009"
+  ]
+},
+{
+  "decision_id": "D012",
+  "date": "2026-04-20",
+  "title": "Blockchain-Based Audit Trail",
+  "category": "Technology Strategy",
+  "status": "Rejected",
+
+  "business_problem": "NovaTech wanted to improve the reliability and traceability of audit records for important business and system activities.",
+
+  "context": {
+    "employees": 4000,
+    "existing_audit_system": "Centralized database with audit logging",
+    "existing_security_controls": [
+      "Role-based access control",
+      "Database backups",
+      "Audit logs",
+      "Monitoring"
+    ],
+    "audit_record_volume": "High",
+    "compliance_requirement": "Standard internal audit requirements"
+  },
+
+  "proposal": "Use blockchain technology to store important audit records in a tamper-resistant distributed ledger.",
+
+  "alternatives_considered": [
+    "Continue using the existing centralized audit database",
+    "Improve access controls and monitoring",
+    "Implement a blockchain-based audit trail",
+    "Use a separate immutable storage system for critical audit records"
+  ],
+
+  "chosen_option": "Reject the blockchain-based audit trail and improve the existing centralized audit infrastructure.",
+
+  "reasoning": [
+    "The existing audit database already provided sufficient traceability for NovaTech's requirements.",
+    "Existing access controls and monitoring could be improved without introducing a new distributed system.",
+    "Blockchain would introduce additional infrastructure and operational complexity.",
+    "The expected business benefit did not justify the implementation and maintenance cost.",
+    "The company did not have a clear requirement for decentralized verification."
+  ],
+
+  "expected_outcome": "Avoid unnecessary technology complexity while maintaining reliable and traceable audit records.",
+
+  "actual_outcome": "The blockchain proposal was rejected and NovaTech continued improving its existing centralized audit infrastructure.",
+
+  "rejection_reasons": [
+    "Existing audit infrastructure already met the main business requirements",
+    "No clear requirement for decentralized verification",
+    "Additional infrastructure complexity",
+    "Higher implementation and maintenance costs",
+    "Unclear additional business value"
+  ],
+
+  "constraints": [
+    "Existing centralized audit infrastructure",
+    "Limited engineering capacity",
+    "Operational complexity requirements",
+    "Need to control infrastructure costs",
+    "No clear decentralized trust requirement"
+  ],
+
+  "lesson_learned": "Technology proposals should be evaluated based on the actual business requirement and expected value. A more complex technology should not replace an existing solution unless it provides meaningful benefits that justify its additional cost and operational complexity.",
+
+  "related_decisions": [
+    "D013"
+  ]
+},
+{
+  "decision_id": "D013",
+  "date": "2026-05-15",
+  "title": "Cloud Cost Optimization",
+  "category": "Infrastructure",
+  "status": "Successful",
+
+  "business_problem": "NovaTech's cloud infrastructure costs had increased as the company added more applications, environments, and workloads.",
+
+  "context": {
+    "employees": 4000,
+    "cloud_provider": "Public cloud infrastructure",
+    "monthly_cloud_spend": 185000,
+    "production_environments": 3,
+    "development_environments": 5,
+    "cost_monitoring": "Basic",
+    "previous_related_decisions": [
+      "D008 - Kubernetes Migration",
+      "D012 - Blockchain-Based Audit Trail"
+    ]
+  },
+
+  "proposal": "Analyze NovaTech's cloud infrastructure and reduce unnecessary spending through resource right-sizing, removal of unused resources, workload scheduling, and improved cost monitoring.",
+
+  "alternatives_considered": [
+    "Continue with the existing cloud infrastructure",
+    "Move workloads to a different cloud provider",
+    "Reduce application infrastructure",
+    "Optimize existing cloud resources and improve cost monitoring"
+  ],
+
+  "chosen_option": "Optimize existing cloud resources and improve cost monitoring",
+
+  "reasoning": [
+    "Several cloud resources were underutilized.",
+    "Some development environments did not need to run continuously.",
+    "Resource sizes could be adjusted based on actual workload requirements.",
+    "Improved cost monitoring would help teams identify unnecessary spending.",
+    "Optimizing the existing infrastructure would require less disruption than migrating to another cloud provider."
+  ],
+
+  "expected_outcome": "Reduce unnecessary cloud spending while maintaining application performance, availability, and reliability.",
+
+  "actual_outcome": "NovaTech successfully reduced unnecessary cloud spending while maintaining the required performance and availability of its applications.",
+
+  "success_factors": [
+    "Detailed analysis of existing cloud usage",
+    "Resource right-sizing",
+    "Removal of unused resources",
+    "Scheduling of non-production workloads",
+    "Improved cloud cost monitoring",
+    "Gradual implementation without major infrastructure changes"
+  ],
+
+  "constraints": [
+    "Production applications could not experience downtime",
+    "Some workloads had unpredictable usage",
+    "Cost reductions could not compromise application performance",
+    "Different teams controlled different cloud resources"
+  ],
+
+  "lesson_learned": "Cloud costs can often be reduced by understanding and optimizing existing infrastructure before considering a major platform migration. Cost optimization should balance financial savings with application performance and reliability.",
+
+  "related_decisions": [
+    "D008",
+    "D012"
+  ]
+},
+{
+  "decision_id": "D014",
+  "date": "2026-06-10",
+  "title": "Four-Day Workweek Pilot",
+  "category": "Human Resources",
+  "status": "Rejected",
+
+  "business_problem": "NovaTech wanted to explore ways to improve employee satisfaction, work-life balance, and productivity while maintaining business performance.",
+
+  "context": {
+    "employees": 4000,
+    "departments": [
+      "Engineering",
+      "Product",
+      "Sales",
+      "Customer Support",
+      "Operations"
+    ],
+    "customer_support_coverage": "Business and extended hours",
+    "team_distribution": "Multiple time zones",
+    "current_work_schedule": "Five-day workweek"
+  },
+
+  "proposal": "Introduce a four-day workweek pilot across NovaTech to evaluate whether employees could maintain productivity while working fewer days.",
+
+  "alternatives_considered": [
+    "Continue with the existing five-day workweek",
+    "Introduce a four-day workweek across the entire company",
+    "Run a four-day workweek pilot only for selected departments",
+    "Introduce flexible working hours instead of reducing the number of working days"
+  ],
+
+  "chosen_option": "Reject the company-wide four-day workweek pilot and explore flexible working arrangements instead.",
+
+  "reasoning": [
+    "Customer support and operations required coverage across extended hours.",
+    "Teams were distributed across multiple time zones.",
+    "A single four-day schedule would create coverage gaps for some business functions.",
+    "Different departments had significantly different operational requirements.",
+    "The organization did not yet have a reliable framework for measuring productivity under a four-day schedule."
+  ],
+
+  "expected_outcome": "Avoid operational disruption while continuing to explore ways of improving employee satisfaction and work flexibility.",
+
+  "actual_outcome": "The company-wide four-day workweek proposal was rejected. NovaTech instead continued evaluating flexible working arrangements that could be adapted to different departments.",
+
+  "rejection_reasons": [
+    "Customer support required extended coverage",
+    "Operations required continuous coordination",
+    "Employees worked across multiple time zones",
+    "Different departments had different operational requirements",
+    "Productivity measurement criteria for the pilot were not sufficiently defined"
+  ],
+
+  "constraints": [
+    "Customer coverage requirements",
+    "Multiple time zones",
+    "Different departmental workflows",
+    "Need to maintain business continuity",
+    "Limited experience measuring productivity under alternative work schedules"
+  ],
+
+  "lesson_learned": "Organizational policies should account for differences between departments and operational requirements. A policy that works for one team may not be suitable for the entire organization.",
+
+  "related_decisions": [
+    "D003",
+    "D007"
+  ]
+},
+{
+  "decision_id": "D015",
+  "date": "2026-07-20",
+  "title": "Customer Loyalty Program",
+  "category": "Customer Strategy",
+  "status": "Failed",
+
+  "business_problem": "NovaTech wanted to improve customer retention and encourage existing customers to use more of its products and services.",
+
+  "context": {
+    "customer_base": 20000,
+    "average_monthly_active_customers": 12500,
+    "customer_retention_rate": "72%",
+    "existing_customer_rewards": "None",
+    "customer_engagement": "Moderate"
+  },
+
+  "proposal": "Launch a customer loyalty program that rewards customers with points and benefits based on purchases, product usage, and continued engagement with NovaTech services.",
+
+  "alternatives_considered": [
+    "Continue with the existing customer engagement strategy",
+    "Offer targeted discounts to selected customers",
+    "Launch a customer loyalty program",
+    "Improve customer support and product experience before introducing rewards"
+  ],
+
+  "chosen_option": "Launch a customer loyalty program",
+
+  "reasoning": [
+    "Rewards could encourage customers to remain active with NovaTech.",
+    "A points-based system could encourage repeat purchases.",
+    "Loyal customers could receive benefits based on their engagement.",
+    "The program was expected to increase customer retention and long-term customer value."
+  ],
+
+  "expected_outcome": "Increase customer retention, improve customer engagement, and encourage repeat purchases from existing customers.",
+
+  "actual_outcome": "The loyalty program was launched but customer participation remained low. The program was eventually discontinued because its operating cost exceeded the value generated.",
+
+  "failure_reasons": [
+    "Customers did not clearly understand how the rewards system worked.",
+    "The available rewards were not sufficiently attractive to many customers.",
+    "Customers had to complete too many actions before receiving meaningful benefits.",
+    "Participation remained lower than expected.",
+    "The cost of operating the loyalty program was higher than the additional customer value generated."
+  ],
+
+  "constraints": [
+    "Limited customer engagement",
+    "Complex reward structure",
+    "Limited marketing resources",
+    "Cost of maintaining the rewards system",
+    "Different customer segments had different preferences"
+  ],
+
+  "lesson_learned": "Customer loyalty programs should provide clear and meaningful value to customers. Before launching a broad rewards program, NovaTech should validate customer interest, simplify the reward structure, and establish measurable criteria for evaluating whether the program generates sufficient business value.",
+
+  "related_decisions": [
+    "D004",
+    "D003",
+    "D007"
+  ]
+}
+  ]
+}

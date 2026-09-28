@@ -1,0 +1,21 @@
+# ========================================================
+# Decision Graveyard - Dependencies
+# ========================================================
+
+# Web Framework & Server
+fastapi>=0.110.0
+uvicorn[standard]>=0.28.0
+
+# Data Validation & Schemas
+pydantic>=2.6.0
+
+# Environment Configuration (.env support)
+python-dotenv>=1.0.0
+
+# LLM Provider (Google Gemini) & HTTP
+google-genai>=0.1.0
+requests>=2.31.0
+
+# Persistent Memory Layer
+hindsight-client>=0.10.0
+

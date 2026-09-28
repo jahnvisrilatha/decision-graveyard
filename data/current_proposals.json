@@ -1,0 +1,197 @@
+{
+  "company": "NovaTech",
+  "current_proposals": [
+    {
+  "proposal_id": "P001",
+  "date": "2026-09-01",
+  "title": "Unified Employee Mobile Platform",
+  "category": "Product",
+  "proposed_by": "Product Management Team",
+
+  "business_problem": "Employees want faster access to attendance, leave management, and important company notifications while using mobile devices.",
+
+  "proposal": "Build a unified mobile platform that provides employee attendance, leave management, notifications, employee information, and other frequently used HR services.",
+
+  "objectives": [
+    "Improve employee access to HR services",
+    "Increase mobile engagement",
+    "Provide faster access to attendance and leave features",
+    "Deliver important notifications through mobile devices"
+  ],
+
+  "current_context": {
+    "employees": 5000,
+    "mobile_adoption": "76%",
+    "engineering_team_size": 15,
+    "existing_solution": "Web-based employee portal and Progressive Web Application",
+    "mobile_usage_trend": "Increasing",
+    "devops_maturity": "High"
+  },
+
+  "alternatives_considered": [
+    "Continue improving the existing web portal",
+    "Extend the existing Progressive Web Application",
+    "Build a dedicated native mobile platform"
+  ],
+
+  "expected_outcome": "Increase employee engagement with digital HR services and provide a more convenient mobile experience."
+},
+{
+  "proposal_id": "P002",
+  "date": "2026-09-05",
+  "title": "Microservices Architecture for New Product",
+  "category": "Engineering",
+  "proposed_by": "Engineering Architecture Team",
+
+  "business_problem": "NovaTech is developing a new product that is expected to experience significant growth and requires independent scaling and deployment of different application components.",
+
+  "proposal": "Design the new product using independently deployable microservices instead of building another monolithic backend.",
+
+  "objectives": [
+    "Allow independent service deployment",
+    "Support independent scaling",
+    "Improve team ownership of services",
+    "Prepare the platform for future growth"
+  ],
+
+  "current_context": {
+    "employees": 5000,
+    "engineering_team_size": 15,
+    "devops_maturity": "High",
+    "deployment_process": "Automated CI/CD",
+    "monitoring": "Centralized monitoring and observability",
+    "container_platform": "Kubernetes",
+    "distributed_systems_experience": "Moderate to High"
+  },
+
+  "alternatives_considered": [
+    "Build another monolithic application",
+    "Use a modular monolith",
+    "Build the new product using microservices"
+  ],
+
+  "expected_outcome": "Create a scalable architecture that allows independent development, deployment, and scaling of major product components."
+},{
+  "proposal_id": "P003",
+  "date": "2026-09-08",
+  "title": "Regional Customer Data Center Expansion",
+  "category": "Infrastructure",
+  "proposed_by": "Infrastructure Team",
+
+  "business_problem": "NovaTech needs additional infrastructure capacity to support customers in a new geographic region and reduce latency for those customers.",
+
+  "proposal": "Deploy additional production infrastructure in a new geographic region to improve application latency and regional availability.",
+
+  "objectives": [
+    "Reduce latency for regional customers",
+    "Improve regional availability",
+    "Support future customer growth"
+  ],
+
+  "current_context": {
+    "customers_in_new_region": 2500,
+    "current_regional_infrastructure": "Limited",
+    "application_latency": "Higher than target",
+    "cloud_infrastructure": "Existing multi-region capable architecture",
+    "engineering_team_size": 15
+  },
+
+  "alternatives_considered": [
+    "Continue using the existing region",
+    "Optimize the existing infrastructure",
+    "Deploy infrastructure in the new geographic region"
+  ],
+
+  "expected_outcome": "Improve application performance and availability for customers in the new region."
+},
+{
+  "proposal_id": "P004",
+  "date": "2026-09-10",
+  "title": "Tiered Subscription Pricing",
+  "category": "Business Strategy",
+  "proposed_by": "Revenue Strategy Team",
+
+  "business_problem": "NovaTech wants to make recurring revenue more predictable while providing pricing options that better match differences in customer usage.",
+
+  "proposal": "Introduce tiered subscription plans with different prices and feature limits for small, medium, and enterprise customers.",
+
+  "objectives": [
+    "Increase revenue predictability",
+    "Provide pricing options for different customer segments",
+    "Reduce customer dissatisfaction caused by a single pricing structure",
+    "Improve customer retention"
+  ],
+
+  "current_context": {
+    "customer_base": 20000,
+    "customer_segments": [
+      "Small businesses",
+      "Medium businesses",
+      "Large enterprises"
+    ],
+    "existing_pricing_model": "Usage-based pricing",
+    "customer_usage_segmentation": "Available",
+    "pricing_analytics": "Improved"
+  },
+
+  "alternatives_considered": [
+    "Continue usage-based pricing",
+    "Introduce optional subscriptions",
+    "Introduce tiered subscription plans",
+    "Create separate pricing models for each customer segment"
+  ],
+
+  "expected_outcome": "Improve revenue predictability while providing pricing options that better match different customer usage patterns."
+},
+{
+  "proposal_id": "P005",
+  "date": "2026-09-12",
+  "title": "Employee Mobile Feature Expansion",
+  "category": "Product",
+  "proposed_by": "Product Management Team",
+
+  "business_problem": "NovaTech wants to improve employee access to frequently used HR services on mobile devices.",
+
+  "proposal": "Develop three separate mobile initiatives: mobile attendance, mobile leave management, and mobile notifications.",
+
+  "objectives": [
+    "Provide mobile attendance access",
+    "Provide mobile leave management",
+    "Provide mobile notifications"
+  ],
+
+  "current_context": {
+    "employees": 5000,
+    "mobile_adoption": "76%",
+    "engineering_team_size": 15,
+    "existing_solution": "Employee web portal and Progressive Web Application"
+  },
+
+  "components": [
+    {
+      "component_id": "P005A",
+      "title": "Mobile Attendance",
+      "description": "Allow employees to view and manage attendance information through a mobile interface."
+    },
+    {
+      "component_id": "P005B",
+      "title": "Mobile Leave Management",
+      "description": "Allow employees to submit and track leave requests through a mobile interface."
+    },
+    {
+      "component_id": "P005C",
+      "title": "Mobile Notifications",
+      "description": "Provide employees with important company and HR notifications through a mobile interface."
+    }
+  ],
+
+  "alternatives_considered": [
+    "Continue improving the existing employee web platform",
+    "Extend the existing Progressive Web Application",
+    "Develop the three mobile capabilities separately"
+  ],
+
+  "expected_outcome": "Improve employee access to frequently used HR services through mobile interfaces."
+}
+  ]
+}

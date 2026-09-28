@@ -1,0 +1,1394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Decision Graveyard — AI-Powered Organizational Decision Intelligence</title>
+  <link rel="stylesheet" href="/static/styles.css?v=9.2.3">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    button.badge-consultative,
+    .badge-consultative.clickable-advisory {
+      cursor: pointer !important;
+      pointer-events: auto !important;
+      position: relative;
+      z-index: 30;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      font-family: var(--font-sans, sans-serif);
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 0.32rem 0.8rem;
+      border-radius: 9999px;
+      background-color: rgba(236, 72, 153, 0.14);
+      color: #f472b6;
+      border: 1px solid rgba(236, 72, 153, 0.4);
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+      user-select: none;
+      outline: none;
+    }
+    button.badge-consultative:hover,
+    .badge-consultative.clickable-advisory:hover {
+      background-color: rgba(236, 72, 153, 0.26);
+      border-color: rgba(236, 72, 153, 0.75);
+      color: #fdf2f8;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 14px rgba(236, 72, 153, 0.3);
+    }
+    #advisoryModal {
+      z-index: 9999;
+    }
+    .advisory-modal-card {
+      max-width: 660px;
+    }
+    .advisory-intro-box {
+      background: linear-gradient(135deg, rgba(236, 72, 153, 0.08), rgba(15, 23, 42, 0.6));
+      border-left: 3px solid #ec4899;
+      border-radius: 0 8px 8px 0;
+      padding: 1.1rem 1.35rem;
+      border: 1px solid rgba(236, 72, 153, 0.2);
+      border-left-width: 3px;
+    }
+    .advisory-intro-text {
+      font-size: 0.93rem;
+      line-height: 1.65;
+      color: #fce7f3;
+      margin: 0;
+    }
+    .advisory-pillars-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin-top: 0.25rem;
+    }
+    @media (max-width: 640px) {
+      .advisory-pillars-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+    .advisory-pillar-card {
+      background-color: var(--bg-card, #1e293b);
+      border: 1px solid var(--border-color, #334155);
+      border-radius: 10px;
+      padding: 1.15rem 1.25rem;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+      display: flex;
+      flex-direction: column;
+      gap: 0.55rem;
+    }
+    .advisory-pillar-card:hover {
+      border-color: rgba(96, 165, 250, 0.45);
+      background-color: #172236;
+      transform: translateY(-2px);
+    }
+    .advisory-pillar-card.highlight-pillar {
+      border-color: rgba(52, 211, 153, 0.35);
+      background: linear-gradient(145deg, rgba(16, 185, 129, 0.07), var(--bg-card, #1e293b));
+    }
+    .pillar-header {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+    .pillar-num {
+      font-family: var(--font-mono, monospace);
+      font-size: 0.72rem;
+      font-weight: 700;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.08);
+      color: var(--text-dim, #94a3b8);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .pillar-icon {
+      font-size: 1.2rem;
+      line-height: 1;
+    }
+    .pillar-title {
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: var(--text-main, #f8fafc);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      margin: 0;
+    }
+    .pillar-desc {
+      font-size: 0.84rem;
+      line-height: 1.55;
+      color: var(--text-muted, #cbd5e1);
+      margin: 0;
+    }
+    .modal-footer-action {
+      display: flex;
+      justify-content: flex-end;
+      padding-top: 0.85rem;
+      border-top: 1px solid var(--border-color, #334155);
+      margin-top: 0.25rem;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Global Navigation Bar -->
+  <header class="app-header">
+    <div class="header-container">
+      <div class="brand-group" id="brandLogoBtn" style="cursor: pointer;">
+        <div class="brand-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+          </svg>
+        </div>
+        <div>
+          <div class="brand-title">Decision Graveyard</div>
+          <div class="brand-subtitle">AI-Powered Organizational Decision Intelligence</div>
+        </div>
+      </div>
+
+      <!-- Navigation Tabs -->
+      <nav class="nav-links">
+        <button class="nav-link active" data-view="dashboard">
+          <span class="nav-icon">&#128202;</span> Dashboard
+        </button>
+        <button class="nav-link" data-view="analyze">
+          <span class="nav-icon">&#128269;</span> Analyze Proposal
+        </button>
+        <button class="nav-link" data-view="report" id="navReportBtn">
+          <span class="nav-icon">&#128196;</span> Analysis Report
+          <span class="badge-dot hidden" id="reportReadyDot"></span>
+        </button>
+        <button class="nav-link" data-view="history">
+          <span class="nav-icon">&#128197;</span> Decision History
+        </button>
+        <button class="nav-link" data-view="how-it-works">
+          <span class="nav-icon">&#9881;</span> How It Works
+        </button>
+      </nav>
+
+      <!-- System Status Pills -->
+      <div class="header-meta">
+        <span class="status-pill connected" title="Connected to Hindsight Cloud Persistent Memory">
+          <span class="pulse-dot"></span>
+          Hindsight Memory Active
+        </span>
+        <button type="button" class="badge-consultative clickable-advisory" id="btnAdvisoryIntelligence" aria-label="Advisory Intelligence" onclick="window.setAdvisoryModalState && window.setAdvisoryModalState(true)" title="Click to view Advisory Intelligence architecture &amp; principles">
+          Advisory Intelligence
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Global Advisory Disclaimer Bar -->
+  <aside class="global-disclaimer-bar">
+    <div class="disclaimer-inner">
+      <span class="disclaimer-icon">&#9878;</span>
+      <span>
+        <strong>Consultative Standard:</strong> Decision Graveyard recalls organizational memory and provides objective risk evidence. It does <em>not</em> automatically approve or reject proposals. Final decision authority belongs strictly to the Product Manager.
+      </span>
+    </div>
+  </aside>
+
+  <!-- Main View Container -->
+  <main class="app-body">
+
+    <!-- =================================================================== -->
+    <!-- VIEW 1: DASHBOARD                                                   -->
+    <!-- =================================================================== -->
+    <section id="view-dashboard" class="page-view active">
+      <div class="page-container">
+        <!-- Hero Section -->
+        <div class="dashboard-hero">
+          <div class="hero-text">
+            <span class="hero-kicker">Organizational Knowledge Protection</span>
+            <h1 class="hero-title">Decision Graveyard</h1>
+            <p class="hero-subtitle">"Remember what your organization already learned."</p>
+            <p class="hero-desc">
+              Prevent costly corporate déjà vu. Uncover forgotten failure modes, recall historical constraints, and detect composite ghosts before teams repeat abandoned initiatives.
+            </p>
+            <div class="hero-actions">
+              <button class="btn-primary btn-large" id="heroAnalyzeBtn">
+                <span>&#128640; Analyze New Proposal</span>
+              </button>
+              <button class="btn-secondary btn-large" id="heroHistoryBtn">
+                <span>&#128197; Browse Decision Graveyard</span>
+              </button>
+            </div>
+          </div>
+          <div class="hero-visual">
+            <div class="memory-vault-card">
+              <div class="vault-header">
+                <span class="vault-dot red"></span>
+                <span class="vault-dot yellow"></span>
+                <span class="vault-dot green"></span>
+                <span class="vault-title">Hindsight Memory Bank: <code>decision-graveyard</code></span>
+              </div>
+              <div class="vault-body">
+                <div class="vault-row">
+                  <span class="v-label">Engine:</span>
+                  <span class="v-val">Hindsight Cloud &bull; Gemini 2.5 Flash</span>
+                </div>
+                <div class="vault-row">
+                  <span class="v-label">Company Scope:</span>
+                  <span class="v-val">NovaTech Enterprise Memory</span>
+                </div>
+                <div class="vault-row">
+                  <span class="v-label">Recall Mode:</span>
+                  <span class="v-val text-success">Semantic Precedent Search</span>
+                </div>
+                <div class="vault-row">
+                  <span class="v-label">Composite Detection:</span>
+                  <span class="v-val text-warning">Multi-Proposal Scoping Active</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Summary Statistics Grid (Real data from /dashboard-stats) -->
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-icon icon-blue">&#128218;</div>
+            <div class="stat-content">
+              <div class="stat-val" id="statTotalHistorical">15</div>
+              <div class="stat-label">Historical Decisions</div>
+              <div class="stat-sub">Documented in memory archive</div>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon icon-green">&#9989;</div>
+            <div class="stat-content">
+              <div class="stat-val text-success" id="statSuccessful">6</div>
+              <div class="stat-label">Successful Initiatives</div>
+              <div class="stat-sub">Proven architectural patterns</div>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon icon-red">&#128465;</div>
+            <div class="stat-content">
+              <div class="stat-val text-danger" id="statFailed">9</div>
+              <div class="stat-label">Abandoned / Failed / Rejected</div>
+              <div class="stat-sub">Historical graveyard precedents</div>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon icon-purple">&#9889;</div>
+            <div class="stat-content">
+              <div class="stat-val text-purple" id="statActiveProposals">5</div>
+              <div class="stat-label">Active Proposals</div>
+              <div class="stat-sub">Ready for memory audit</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- "How Decision Graveyard Works" Pipeline Section -->
+        <div class="panel-box workflow-box">
+          <div class="box-header">
+            <div>
+              <h2 class="box-title">How Decision Graveyard Works</h2>
+              <p class="box-subtitle">Autonomous organizational intelligence pipeline</p>
+            </div>
+            <span class="badge-evidence">End-to-End Workflow</span>
+          </div>
+
+          <div class="pipeline-flow-diagram">
+            <div class="pipe-step">
+              <div class="pipe-num">1</div>
+              <div class="pipe-node">Past Decisions</div>
+              <div class="pipe-sub">Historical Archives</div>
+            </div>
+            <div class="pipe-arrow">&rarr;</div>
+            <div class="pipe-step">
+              <div class="pipe-num">2</div>
+              <div class="pipe-node">Hindsight Memory</div>
+              <div class="pipe-sub">Vector Retention</div>
+            </div>
+            <div class="pipe-arrow">&rarr;</div>
+            <div class="pipe-step">
+              <div class="pipe-num">3</div>
+              <div class="pipe-node">New Proposal</div>
+              <div class="pipe-sub">PM Submission</div>
+            </div>
+            <div class="pipe-arrow">&rarr;</div>
+            <div class="pipe-step">
+              <div class="pipe-num">4</div>
+              <div class="pipe-node">Memory Recall</div>
+              <div class="pipe-sub">Semantic Retrieval</div>
+            </div>
+            <div class="pipe-arrow">&rarr;</div>
+            <div class="pipe-step">
+              <div class="pipe-num">5</div>
+              <div class="pipe-node">Ghost Detection</div>
+              <div class="pipe-sub">Single & Composite</div>
+            </div>
+            <div class="pipe-arrow">&rarr;</div>
+            <div class="pipe-step">
+              <div class="pipe-num">6</div>
+              <div class="pipe-node">AI Reasoning</div>
+              <div class="pipe-sub">Then vs Now Audit</div>
+            </div>
+            <div class="pipe-arrow">&rarr;</div>
+            <div class="pipe-step highlight">
+              <div class="pipe-num">7</div>
+              <div class="pipe-node">Human Decision</div>
+              <div class="pipe-sub">PM Final Action</div>
+            </div>
+          </div>
+
+          <div class="workflow-caption">
+            <span class="caption-icon">&#128161;</span>
+            <span class="caption-text">
+              <strong>Core Mission:</strong> Decision Graveyard recalls organizational memory and connects past decisions with current proposals before teams repeat previously explored paths.
+            </span>
+          </div>
+        </div>
+
+        <!-- Hackathon Test Suite / Demo Scenarios -->
+        <div class="panel-box">
+          <div class="box-header">
+            <div>
+              <h2 class="box-title">Interactive Demo Scenarios</h2>
+              <p class="box-subtitle">Click any proposal to immediately evaluate organizational memory against historical precedents</p>
+            </div>
+            <span class="badge-reasoning">One-Click Demonstration</span>
+          </div>
+
+          <div class="demo-cards-grid">
+            <!-- Scenario 1: P001 -->
+            <div class="demo-card" data-proposal="P001">
+              <div class="demo-header">
+                <span class="demo-code">TEST 1 &bull; P001</span>
+                <span class="badge-alert">Single Ghost</span>
+              </div>
+              <h3 class="demo-title">Unified Employee Mobile Platform</h3>
+              <p class="demo-desc">Single proposal attempting to build a mobile HR platform across native clients.</p>
+              <div class="demo-expected">
+                <span class="exp-label">Expected:</span> Potential Ghost Decision Detected &rarr; <strong>D001 (Abandoned)</strong>
+              </div>
+              <button class="btn-demo-action">Run Analysis &rarr;</button>
+            </div>
+
+            <!-- Scenario 2: P002 -->
+            <div class="demo-card" data-proposal="P002">
+              <div class="demo-header">
+                <span class="demo-code">TEST 2 &bull; P002</span>
+                <span class="badge-reasoning">Architecture</span>
+              </div>
+              <h3 class="demo-title">Microservices Architecture</h3>
+              <p class="demo-desc">Decomposing monolithic backend into independent microservices for new growth.</p>
+              <div class="demo-expected">
+                <span class="exp-label">Expected:</span> Precedent match with <strong>D002 (Microservices Migration)</strong>
+              </div>
+              <button class="btn-demo-action">Run Analysis &rarr;</button>
+            </div>
+
+            <!-- Scenario 3: P003 -->
+            <div class="demo-card" data-proposal="P003">
+              <div class="demo-header">
+                <span class="demo-code">TEST 3 &bull; P003</span>
+                <span class="badge-success">Control Case</span>
+              </div>
+              <h3 class="demo-title">Regional Customer Data Center</h3>
+              <p class="demo-desc">Expanding cloud infrastructure footprint into a new geographic latency zone.</p>
+              <div class="demo-expected">
+                <span class="exp-label">Expected:</span> <strong>No Strong Ghost Detected</strong> (Valid control)
+              </div>
+              <button class="btn-demo-action">Run Analysis &rarr;</button>
+            </div>
+
+            <!-- Scenario 4: P004 -->
+            <div class="demo-card" data-proposal="P004">
+              <div class="demo-header">
+                <span class="demo-code">TEST 4 &bull; P004</span>
+                <span class="badge-alert">Pricing Strategy</span>
+              </div>
+              <h3 class="demo-title">Tiered Subscription Pricing</h3>
+              <p class="demo-desc">Replacing usage-based pricing with multi-tier subscription plans for predictability.</p>
+              <div class="demo-expected">
+                <span class="exp-label">Expected:</span> Precedent match with <strong>D004 (Subscription Model)</strong>
+              </div>
+              <button class="btn-demo-action">Run Analysis &rarr;</button>
+            </div>
+
+            <!-- Scenario 5: P005 (Flagship) -->
+            <div class="demo-card highlight-killer" data-proposal="P005">
+              <div class="demo-header">
+                <span class="demo-code">TEST 5 &bull; P005 (KILLER FEATURE)</span>
+                <span class="badge-killer">Composite Ghost</span>
+              </div>
+              <h3 class="demo-title">Employee Mobile Feature Expansion</h3>
+              <p class="demo-desc">
+                Three separate proposals: <strong>P005A (Attendance)</strong> + <strong>P005B (Leave)</strong> + <strong>P005C (Notifications)</strong>. Individually small, together they secretly recreate abandoned <strong>D001</strong>!
+              </p>
+              <div class="demo-expected">
+                <span class="exp-label">Expected:</span> <strong>Potential Composite Ghost Detected &rarr; D001</strong>
+              </div>
+              <button class="btn-demo-action highlight-btn">Run Composite Analysis &rarr;</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Recent Historical Archive Strip -->
+        <div class="panel-box">
+          <div class="box-header">
+            <div>
+              <h2 class="box-title">Recent Graveyard Precedents</h2>
+              <p class="box-subtitle">Extracted from NovaTech organizational history</p>
+            </div>
+            <button class="btn-text" id="viewAllDecisionsBtn">View Full Decision History &rarr;</button>
+          </div>
+          <div class="recent-decisions-grid" id="dashboardRecentDecisions">
+            <!-- Populated via /dashboard-stats -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- =================================================================== -->
+    <!-- VIEW 2: ANALYZE PROPOSAL                                            -->
+    <!-- =================================================================== -->
+    <section id="view-analyze" class="page-view hidden">
+      <div class="page-container">
+        <div class="page-title-strip">
+          <div>
+            <h1 class="page-main-title">Proposal Submission &amp; Intelligence Query</h1>
+            <p class="page-main-sub">Submit a new product initiative to audit against historical organizational memory.</p>
+          </div>
+          <span class="badge-evidence">Product Strategy Specification</span>
+        </div>
+
+        <div class="proposal-layout-grid">
+          <!-- Main Form Card -->
+          <div class="panel-box">
+            <div class="box-header">
+              <div>
+                <h2 class="box-title">Proposal Specification</h2>
+                <p class="box-subtitle">Enter proposal details or load a pre-configured organizational preset</p>
+              </div>
+            </div>
+
+            <!-- Preset Quick Loader -->
+            <div class="preset-loader-box">
+              <label class="form-label" for="presetSelector">Load Organizational Preset:</label>
+              <div class="preset-control-row">
+                <select id="presetSelector" class="form-control">
+                  <option value="" disabled selected>Loading organizational proposals...</option>
+                </select>
+              </div>
+              <div class="quick-preset-buttons">
+                <span class="preset-chip" data-id="P005">P005: Mobile Expansion (Composite Ghost)</span>
+                <span class="preset-chip" data-id="P001">P001: Mobile Platform (Single Ghost)</span>
+                <span class="preset-chip" data-id="P002">P002: Microservices</span>
+                <span class="preset-chip" data-id="P003">P003: Regional DC (Control)</span>
+                <span class="preset-chip" data-id="P004">P004: Tiered Pricing</span>
+              </div>
+            </div>
+
+            <hr class="divider">
+
+            <form id="proposalForm">
+              <div class="form-row-2">
+                <div class="form-group">
+                  <label class="form-label" for="inpProposalId">Proposal ID:</label>
+                  <input type="text" id="inpProposalId" class="form-control" placeholder="e.g. P005 or P001" required>
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="inpCategory">Category:</label>
+                  <input type="text" id="inpCategory" class="form-control" placeholder="Product, Engineering, Infrastructure..." value="Product">
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="inpTitle">Proposal Title:</label>
+                <input type="text" id="inpTitle" class="form-control" placeholder="e.g. Employee Mobile Feature Expansion" required>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="inpBusinessProblem">Business Problem:</label>
+                <textarea id="inpBusinessProblem" class="form-control" rows="3" placeholder="What core friction, customer need, or business bottleneck does this proposal address?" required></textarea>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="inpDescription">Proposal Description:</label>
+                <textarea id="inpDescription" class="form-control" rows="3" placeholder="Describe the proposed technical architecture, product capabilities, or strategic changes." required></textarea>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="inpObjectives">Objectives (one per line):</label>
+                <textarea id="inpObjectives" class="form-control" rows="3" placeholder="e.g. Provide mobile attendance access&#10;Provide mobile leave management&#10;Provide mobile notifications"></textarea>
+              </div>
+
+              <div class="form-row-2">
+                <div class="form-group">
+                  <label class="form-label" for="inpCurrentContext">Current Company Context:</label>
+                  <textarea id="inpCurrentContext" class="form-control" rows="2" placeholder="e.g. Mobile adoption: 76%, Engineering team: 15 devs, DevOps: High"></textarea>
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="inpAlternatives">Alternatives Considered:</label>
+                  <textarea id="inpAlternatives" class="form-control" rows="2" placeholder="e.g. Extend Progressive Web App, Improve existing web portal"></textarea>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="inpExpectedOutcome">Expected Outcome:</label>
+                <input type="text" id="inpExpectedOutcome" class="form-control" placeholder="Anticipated business benefit or operational milestone">
+              </div>
+
+              <div class="form-actions">
+                <button type="submit" id="btnRunAnalysis" class="btn-primary btn-large">
+                  <span class="btn-icon">&#128269;</span>
+                  <span class="btn-text">Analyze Proposal Against Organizational Memory</span>
+                </button>
+              </div>
+            </form>
+          </div>
+
+          <!-- Sidebar Context Cards -->
+          <div class="proposal-sidebar">
+            <div class="panel-box side-info-card">
+              <h3 class="side-title">&#128203; Audit Methodology</h3>
+              <p class="side-p">When you click <strong>Analyze Proposal</strong>, the DecisionAgent queries Hindsight memory using semantic search, checks both single and composite ghost detection matrices, and extracts historical blockers.</p>
+              <div class="side-steps-list">
+                <div class="side-step-item">&#10003; Probes Hindsight vector bank</div>
+                <div class="side-step-item">&#10003; Evaluates GhostDetector</div>
+                <div class="side-step-item">&#10003; Scans MultiProposalDetector</div>
+                <div class="side-step-item">&#10003; Itemizes Then vs Now delta</div>
+              </div>
+            </div>
+
+            <div class="panel-box killer-promo-card">
+              <h3 class="side-title">&#128256; Flagship Feature: Composite Ghosts</h3>
+              <p class="side-p">Departmental silos often propose modular micro-features (like mobile attendance, leave, and alerts) that quietly assemble an initiative previously abandoned due to prohibitive overhead.</p>
+              <button class="btn-secondary btn-full" id="btnSelectP005Quick">Load P005 Composite Demo</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Animated Analysis Progress Modal/Overlay -->
+        <div id="analysisLoadingOverlay" class="loading-overlay hidden">
+          <div class="loading-modal-card">
+            <div class="modal-spinner"></div>
+            <h2 id="loadingModalTitle">Auditing Organizational Memory...</h2>
+            <p id="loadingModalSubtitle" class="modal-sub">Probing Hindsight Cloud vector index for prior organizational initiatives</p>
+            
+            <div class="modal-step-list">
+              <div class="modal-step" id="mStep1">
+                <span class="m-icon">&#9679;</span>
+                <span class="m-text">Analyzing proposal parameters...</span>
+              </div>
+              <div class="modal-step" id="mStep2">
+                <span class="m-icon">&#9679;</span>
+                <span class="m-text">Recalling organizational memory from Hindsight...</span>
+              </div>
+              <div class="modal-step" id="mStep3">
+                <span class="m-icon">&#9679;</span>
+                <span class="m-text">Comparing historical decisions &amp; outcomes...</span>
+              </div>
+              <div class="modal-step" id="mStep4">
+                <span class="m-icon">&#9679;</span>
+                <span class="m-text">Checking for potential ghost decisions...</span>
+              </div>
+              <div class="modal-step" id="mStep5">
+                <span class="m-icon">&#9679;</span>
+                <span class="m-text">Checking for composite ghost decisions...</span>
+              </div>
+              <div class="modal-step" id="mStep6">
+                <span class="m-icon">&#9679;</span>
+                <span class="m-text">Generating decision intelligence &amp; Then vs Now audit...</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Error Card -->
+        <div id="analysisErrorCard" class="alert-banner alert-danger hidden">
+          <div class="alert-icon">&#9888;</div>
+          <div class="alert-content">
+            <h4 class="alert-heading">Analysis Error</h4>
+            <p id="analysisErrorMessage">Failed to analyze proposal.</p>
+          </div>
+          <button class="btn-close-alert" id="btnCloseError">&times;</button>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- =================================================================== -->
+    <!-- VIEW 3: ANALYSIS REPORT                                             -->
+    <!-- =================================================================== -->
+    <section id="view-report" class="page-view hidden">
+      <div class="page-container">
+        <!-- Empty State if no analysis loaded -->
+        <div id="reportEmptyState" class="empty-state-card">
+          <div class="empty-icon">&#128196;</div>
+          <h2>No Proposal Analyzed Yet</h2>
+          <p>Submit a proposal from the <strong>Analyze Proposal</strong> view or select an interactive scenario from the <strong>Dashboard</strong> to view its comprehensive Decision Intelligence Report.</p>
+          <button class="btn-primary" id="btnGoToAnalyze">Go to Proposal Submission</button>
+        </div>
+
+        <!-- Full Report Container (Visible after analysis) -->
+        <div id="reportActiveContainer" class="hidden">
+          <!-- Report Header Strip -->
+          <div class="report-header-banner">
+            <div class="report-header-left">
+              <span class="badge-evidence">DECISION INTELLIGENCE REPORT</span>
+              <h1 class="report-title" id="repProposalTitle">Employee Mobile Feature Expansion</h1>
+              <div class="report-meta-row">
+                <span>Proposal ID: <strong id="repProposalId">P005</strong></span>
+                <span class="meta-sep">&bull;</span>
+                <span>Evaluated by: <strong>DecisionAgent</strong></span>
+                <span class="meta-sep">&bull;</span>
+                <span>Timestamp: <span id="repGeneratedAt">Just now</span></span>
+              </div>
+            </div>
+            <div class="report-header-right">
+              <button class="btn-secondary" id="btnCopyBriefing">
+                <span>&#128203; Copy 10-Point PM Briefing</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Report Sub-Navigation Tabs -->
+          <div class="report-tabs-bar">
+            <button class="rep-tab-btn active" data-reptab="rep-summary">
+              <span class="tab-icon">&#128202;</span> A–E. Executive Summary &amp; Ghost
+            </button>
+            <button class="rep-tab-btn" data-reptab="rep-then-vs-now">
+              <span class="tab-icon">&#9878;</span> G–I. Then vs Now Comparison
+            </button>
+            <button class="rep-tab-btn" data-reptab="rep-composite" id="repTabCompositeBtn">
+              <span class="tab-icon">&#128256;</span> Composite Ghost Detection
+              <span class="tab-pill" id="repCompositePill">Detected</span>
+            </button>
+            <button class="rep-tab-btn" data-reptab="rep-hindsight">
+              <span class="tab-icon">&#129504;</span> F. Hindsight Memory
+            </button>
+            <button class="rep-tab-btn" data-reptab="rep-reasoning">
+              <span class="tab-icon">&#9881;</span> J–K. AI Reasoning &amp; PM Questions
+            </button>
+            <button class="rep-tab-btn highlight-pm-tab" data-reptab="rep-sandbox">
+              <span class="tab-icon">&#9997;</span> PM Final Decision Sandbox
+            </button>
+          </div>
+
+          <!-- SUB-TAB 1: EXECUTIVE SUMMARY & GHOST ASSESSMENT (SECTIONS A–E) -->
+          <div class="rep-tab-content active" id="rep-summary">
+            <!-- SECTION A: ANALYSIS SUMMARY -->
+            <div class="panel-box executive-summary-box">
+              <div class="box-header">
+                <div>
+                  <span class="badge-reasoning">A. ANALYSIS SUMMARY</span>
+                  <h3 class="box-title">Executive Summary</h3>
+                  <p class="box-subtitle">Synthesized organizational memory briefing for product leadership</p>
+                </div>
+                <button type="button" class="badge-consultative clickable-advisory" onclick="window.setAdvisoryModalState && window.setAdvisoryModalState(true)" title="Click to view Advisory Intelligence architecture &amp; principles">Consultative Intelligence</button>
+              </div>
+              <div class="summary-body">
+                <p id="repExecutiveSummary" class="text-body executive-summary-text"></p>
+              </div>
+            </div>
+
+            <!-- SECTION B: POTENTIAL GHOST DECISION ASSESSMENT -->
+            <div class="panel-box assessment-panel-box" id="ghostAssessmentCard">
+              <div class="box-header">
+                <div>
+                  <span class="badge-evidence">B. GHOST ASSESSMENT</span>
+                  <h3 class="box-title">Potential Ghost Decision</h3>
+                  <p class="box-subtitle">Automated comparison of proposal parameters against organizational failure records</p>
+                </div>
+                <span class="badge-reasoning" id="assessSubtypeBadge">Organizational Audit</span>
+              </div>
+              
+              <div class="assessment-tiles-grid">
+                <!-- Tile 1: Status -->
+                <div class="assessment-tile-card" id="assessStatusTile">
+                  <span class="tile-label">Potential Ghost Decision</span>
+                  <div class="tile-val-row">
+                    <span class="status-indicator-dot" id="assessStatusDot"></span>
+                    <span class="tile-status-text" id="assessGhostStatusText">Detected</span>
+                  </div>
+                  <span class="tile-caption" id="assessGhostStatusSub">Historical failure precedent identified</span>
+                </div>
+
+                <!-- Tile 2: Confidence -->
+                <div class="assessment-tile-card" id="assessConfidenceTile">
+                  <span class="tile-label">Confidence Level</span>
+                  <div class="tile-val-row">
+                    <span class="confidence-badge badge-conf-high" id="assessConfidenceBadge">Confidence: High</span>
+                  </div>
+                  <span class="tile-caption" id="assessConfidenceSub">High semantic &amp; structural overlap</span>
+                </div>
+
+                <!-- Tile 3: Decisions Involved -->
+                <div class="assessment-tile-card" id="assessDecisionsTile">
+                  <span class="tile-label">Historical Decisions Involved</span>
+                  <div class="tile-val-row decisions-pills-row" id="assessDecisionsPills">
+                    <!-- Populated dynamically -->
+                  </div>
+                  <span class="tile-caption" id="assessDecisionsSub">Archived decisions retrieved from memory</span>
+                </div>
+              </div>
+
+              <!-- Relationship visual flow diagram -->
+              <div class="ghost-relationship-visual" id="ghostRelationshipVisual" style="margin-top: 1.25rem;">
+                <div class="ghost-entity current-entity">
+                  <span class="entity-type">Current Proposal</span>
+                  <div class="entity-name" id="ghostCurrentProposalName">Employee Mobile Feature Expansion</div>
+                  <div class="entity-code" id="ghostCurrentProposalCode">P001</div>
+                </div>
+                <div class="ghost-arrow-node">
+                  <div class="arrow-symbol">&darr;</div>
+                  <div class="arrow-caption" id="ghostArrowCaption">Resembles Historical Precedent</div>
+                </div>
+                <div class="ghost-entity past-entity">
+                  <span class="entity-type" id="ghostPastEntityType">Primary Historical Match</span>
+                  <div class="entity-name" id="ghostMatchedName">D001 — Employee Mobile Application</div>
+                  <div class="entity-code status-abandoned" id="ghostHistoricalStatus">Status: Abandoned</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- SECTION E: WHY THIS LOOKS FAMILIAR -->
+            <div class="panel-box why-familiar-box">
+              <div class="box-header">
+                <div>
+                  <span class="badge-reasoning">E. CONCEPTUAL OVERLAP</span>
+                  <h3 class="box-title">Why This Looks Familiar</h3>
+                  <p class="box-subtitle">Conceptual relationship and functional overlap with past decisions</p>
+                </div>
+              </div>
+              <div class="why-familiar-card-body">
+                <div class="familiar-icon-indicator">&#128161;</div>
+                <div class="familiar-narrative-content">
+                  <p id="ghostRelationshipExplanation" class="text-body familiar-p"></p>
+                </div>
+              </div>
+            </div>
+
+            <!-- SECTIONS C & D: HISTORICAL MATCHES (PRIMARY MATCH & RELATED PRECEDENTS) -->
+            <div class="panel-box">
+              <div class="box-header">
+                <div>
+                  <span class="badge-evidence">C &amp; D. HISTORICAL PRECEDENTS</span>
+                  <h3 class="box-title">Historical Matches</h3>
+                  <p class="box-subtitle">Primary failed/abandoned matches and related precedents retrieved from organizational memory</p>
+                </div>
+              </div>
+              <div class="historical-matches-grid" id="histMatchesGrid">
+                <!-- Dynamically rendered Primary Match & Related Precedents -->
+              </div>
+            </div>
+          </div>
+
+          <!-- SUB-TAB 2: THEN VS NOW COMPARISON (SECTIONS D, E, F) -->
+          <div class="rep-tab-content" id="rep-then-vs-now">
+            <!-- THEN VS NOW COMPARISON CONTAINER -->
+            <div class="panel-box">
+              <div class="box-header">
+                <div>
+                  <span class="badge-evidence">I. THEN VS NOW COMPARISON</span>
+                  <h3 class="box-title">Contextual Evolution</h3>
+                  <p class="box-subtitle">A previous failure does not mean the current proposal must fail. Compare historical constraints with today's reality.</p>
+                </div>
+                <span class="badge-evidence">Comparative Telemetry</span>
+              </div>
+
+              <!-- Side-by-Side: Historical Blockers vs Current Conditions -->
+              <div class="comparison-dual-grid">
+                <!-- SECTION G: HISTORICAL BLOCKERS -->
+                <div class="dual-column past-column">
+                  <div class="column-header">
+                    <span class="col-tag">Historical Conditions (Then)</span>
+                    <h4>G. Historical Blockers</h4>
+                    <p class="col-sub">Why the initiative was previously abandoned or failed</p>
+                  </div>
+                  <ul class="blocker-item-list" id="repHistoricalBlockersList">
+                    <!-- Populated dynamically -->
+                  </ul>
+                </div>
+
+                <!-- SECTION H: CURRENT CONDITIONS -->
+                <div class="dual-column present-column">
+                  <div class="column-header">
+                    <span class="col-tag">Current Conditions (Now)</span>
+                    <h4>H. Current Company Telemetry</h4>
+                    <p class="col-sub">Operational metrics and engineering readiness today</p>
+                  </div>
+                  <div class="conditions-cards-grid" id="repCurrentConditionsGrid">
+                    <!-- Populated dynamically -->
+                  </div>
+                </div>
+              </div>
+
+              <hr class="divider">
+
+              <!-- Separation of Persistent vs Cleared Blockers -->
+              <div class="comparison-dual-grid">
+                <!-- Persistent Risks -->
+                <div class="dual-column warning-box">
+                  <div class="column-header">
+                    <span class="badge-alert">Persistent Risk Overlap</span>
+                    <h4>Blockers That May Still Apply</h4>
+                    <p class="col-sub">Constraints or maintenance overheads that remain active today</p>
+                  </div>
+                  <ul class="blocker-item-list danger-bullets" id="repBlockersStillApplyList">
+                    <!-- Populated dynamically -->
+                  </ul>
+                </div>
+
+                <!-- Cleared Constraints -->
+                <div class="dual-column success-box">
+                  <div class="column-header">
+                    <span class="badge-success">Favorable Evolution</span>
+                    <h4>Blockers That May Have Changed</h4>
+                    <p class="col-sub">Historical blockers mitigated by organizational growth or technology changes</p>
+                  </div>
+                  <ul class="blocker-item-list success-bullets" id="repBlockersChangedList">
+                    <!-- Populated dynamically -->
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- SUB-TAB 3: COMPOSITE GHOST DETECTION (KILLER FEATURE) -->
+          <div class="rep-tab-content" id="rep-composite">
+            <div class="panel-box killer-feature-panel">
+              <div class="box-header">
+                <div>
+                  <span class="badge-killer">THE KILLER FEATURE</span>
+                  <h3 class="box-title">Potential Composite Ghost Decision</h3>
+                  <p class="box-subtitle">
+                    "Multiple individually reasonable proposals can collectively recreate a decision the organization previously abandoned."
+                  </p>
+                </div>
+              </div>
+
+              <!-- Composite Visual Relationship -->
+              <div class="composite-diagram-container">
+                <div class="composite-left-group">
+                  <span class="group-label">Discrete Current Proposals Involved:</span>
+                  <div class="components-stack" id="compProposalsList">
+                    <!-- E.g. P005A, P005B, P005C -->
+                  </div>
+                </div>
+                <div class="composite-center-arrow">
+                  <div class="c-symbol">&rarr;</div>
+                  <div class="c-caption">Collectively Recreates Scope Of</div>
+                </div>
+                <div class="composite-right-target">
+                  <span class="group-label">Historical Abandoned Macro-Project:</span>
+                  <div class="target-decision-box" id="compMatchedDecisionBox">
+                    <!-- E.g. D001 Employee Mobile App -->
+                  </div>
+                </div>
+              </div>
+
+              <!-- Collective Resemblance Explanation -->
+              <div class="composite-explanation-card">
+                <h4 class="comp-heading">&#128269; Why Proposals Collectively Recreate the Historical Initiative:</h4>
+                <p id="compRecreationExplanation" class="text-body"></p>
+              </div>
+
+              <!-- Composite Blocker Analysis -->
+              <div class="comparison-dual-grid" style="margin-top: 1.5rem;">
+                <div class="dual-column warning-box">
+                  <h4>Collective Blockers Still Applicable</h4>
+                  <ul class="blocker-item-list danger-bullets" id="compBlockersStillApplyList"></ul>
+                </div>
+                <div class="dual-column success-box">
+                  <h4>Collective Blockers Mitigated Today</h4>
+                  <ul class="blocker-item-list success-bullets" id="compBlockersChangedList"></ul>
+                </div>
+              </div>
+
+              <!-- Composite Questions -->
+              <div class="questions-strip" style="margin-top: 1.5rem;">
+                <h4>Questions for Leadership on Composite Proposals:</h4>
+                <ul class="questions-list" id="compQuestionsList"></ul>
+              </div>
+            </div>
+          </div>
+
+          <!-- SUB-TAB 4: HINDSIGHT MEMORY (SECTION B) -->
+          <div class="rep-tab-content" id="rep-hindsight">
+            <div class="panel-box">
+              <div class="box-header">
+                <div>
+                  <span class="badge-evidence">RECALLED FROM HINDSIGHT MEMORY</span>
+                  <h3 class="box-title">F. Organizational Memory Bank Recall</h3>
+                  <p class="box-subtitle">Authentic historical memories retrieved via Hindsight Cloud semantic search</p>
+                </div>
+                <div class="hindsight-telemetry">
+                  <span class="pill-telemetry">Bank: <strong>decision-graveyard</strong></span>
+                  <span class="pill-telemetry">Recalled Units: <strong id="hindsightMemoryCount">0</strong></span>
+                </div>
+              </div>
+
+              <div class="memories-stream" id="recalledMemoriesContainer">
+                <!-- Populated dynamically from actual API response -->
+              </div>
+            </div>
+          </div>
+
+          <!-- SUB-TAB 5: AI REASONING & PM QUESTIONS (SECTIONS J, K) -->
+          <div class="rep-tab-content" id="rep-reasoning">
+            <!-- SECTION J: AI REASONING -->
+            <div class="panel-box">
+              <div class="box-header">
+                <div>
+                  <h3 class="box-title">J. AI Decision Reasoning</h3>
+                  <p class="box-subtitle">Clear demarcation of evidence, context, and AI synthesis</p>
+                </div>
+                <span class="badge-reasoning">Decision Reasoning</span>
+              </div>
+
+              <!-- Tri-Zone Demarcation -->
+              <div class="reasoning-zones-grid">
+                <div class="reasoning-zone zone-evidence">
+                  <span class="badge-evidence">HISTORICAL EVIDENCE</span>
+                  <p class="zone-text" id="zoneEvidenceText">Historical decisions, documented failure causes, and architectural lessons recorded in organizational memory.</p>
+                </div>
+                <div class="reasoning-zone zone-context">
+                  <span class="badge-context">CURRENT COMPANY CONTEXT</span>
+                  <p class="zone-text" id="zoneContextText">Current employee adoption (76%), team size (15 devs), and automated CI/CD pipelines.</p>
+                </div>
+                <div class="reasoning-zone zone-analysis">
+                  <span class="badge-reasoning">AI ANALYSIS</span>
+                  <p class="zone-text" id="zoneAnalysisText">Synthesis evaluating whether historical failure drivers remain active or have been superseded.</p>
+                </div>
+              </div>
+
+              <!-- Comprehensive Narrative -->
+              <div class="full-narrative-box" style="margin-top: 1.5rem;">
+                <h4 class="box-subheading">Comprehensive Strategic Synthesis:</h4>
+                <div id="repFullAnalysisText" class="text-body formatted-paragraphs"></div>
+              </div>
+            </div>
+
+            <!-- SECTION K: HUMAN REVIEW QUESTIONS -->
+            <div class="panel-box questions-panel">
+              <div class="box-header">
+                <div>
+                  <span class="badge-pm">HUMAN REVIEW</span>
+                  <h3 class="box-title">K. Questions for the Product Manager</h3>
+                  <p class="box-subtitle">Critical inquiries to guide decision-making before allocating engineering capacity</p>
+                </div>
+              </div>
+
+              <ul class="questions-list big-questions" id="repHumanQuestionsList">
+                <!-- Populated dynamically -->
+              </ul>
+
+              <div class="questions-footer-disclaimer">
+                <span class="disclaimer-stamp">&#9878;</span>
+                <span class="disclaimer-text">
+                  <strong>AI provides evidence and reasoning. The Product Manager makes the final decision.</strong>
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <!-- SUB-TAB 6: PRODUCT MANAGER DECISION SANDBOX -->
+          <div class="rep-tab-content" id="rep-sandbox">
+            <div class="panel-box pm-decision-panel">
+              <div class="box-header">
+                <div>
+                  <span class="badge-pm">HUMAN-IN-THE-LOOP</span>
+                  <h3 class="box-title">Product Manager Final Decision Sandbox</h3>
+                  <p class="box-subtitle">Exercise product leadership by recording your final decision with mitigating rationale.</p>
+                </div>
+              </div>
+
+              <div class="decision-radios-grid">
+                <label class="decision-card">
+                  <input type="radio" name="pmAction" value="mitigated" checked>
+                  <div class="decision-card-body">
+                    <span class="d-title">&#9989; Proceed with Architectural Mitigations</span>
+                    <span class="d-desc">Resolve persistent blockers by pivoting implementation (e.g., extend PWA instead of dual native apps).</span>
+                  </div>
+                </label>
+
+                <label class="decision-card">
+                  <input type="radio" name="pmAction" value="review">
+                  <div class="decision-card-body">
+                    <span class="d-title">&#128172; Request Architectural Review</span>
+                    <span class="d-desc">Escalate human review questions to engineering leads before committing sprint resources.</span>
+                  </div>
+                </label>
+
+                <label class="decision-card">
+                  <input type="radio" name="pmAction" value="archive">
+                  <div class="decision-card-body">
+                    <span class="d-title">&#128465; Archive / Reject Based on Precedent</span>
+                    <span class="d-desc">Historical constraints remain too prohibitive relative to expected return.</span>
+                  </div>
+                </label>
+
+                <label class="decision-card">
+                  <input type="radio" name="pmAction" value="approve">
+                  <div class="decision-card-body">
+                    <span class="d-title">&#128640; Approve Proposal Unmodified</span>
+                    <span class="d-desc">Current conditions (76% adoption, 15 devs, CI/CD) adequately satisfy risk profile.</span>
+                  </div>
+                </label>
+              </div>
+
+              <div class="form-group" style="margin-top: 1.5rem;">
+                <label class="form-label" for="pmDecisionNotes">Decision Rationale &amp; Mitigation Notes:</label>
+                <textarea id="pmDecisionNotes" class="form-control" rows="4" placeholder="Document why this decision was made and how persistent blockers are being addressed..."></textarea>
+              </div>
+
+              <div class="form-actions">
+                <button type="button" id="btnSaveDecision" class="btn-primary">
+                  <span>&#128190; Record Decision in Audit Memory</span>
+                </button>
+                <button type="button" id="btnCopyBriefingSandbox" class="btn-secondary">
+                  <span>&#128203; Copy 10-Point Briefing</span>
+                </button>
+              </div>
+
+              <div id="sandboxConfirmation" class="alert-banner alert-success hidden" style="margin-top: 1rem;">
+                <span class="alert-icon">&#10003;</span>
+                <span class="alert-text">Decision recorded. This evaluation will serve as organizational precedent for future teams.</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- =================================================================== -->
+    <!-- VIEW 4: DECISION HISTORY                                            -->
+    <!-- =================================================================== -->
+    <section id="view-history" class="page-view hidden">
+      <div class="page-container">
+        <div class="page-title-strip">
+          <div>
+            <h1 class="page-main-title">Organizational Decision History</h1>
+            <p class="page-main-sub">Explore NovaTech's historical decisions stored in organizational memory.</p>
+          </div>
+          <span class="badge-evidence">Factual Organizational Memory</span>
+        </div>
+
+        <!-- Filter & Search Toolbar -->
+        <div class="panel-box toolbar-box">
+          <div class="toolbar-grid">
+            <div class="search-input-wrap">
+              <span class="search-icon">&#128269;</span>
+              <input type="text" id="histSearchInput" class="form-control" placeholder="Search by ID, title, problem, or lesson learned...">
+            </div>
+            <div class="filter-wrap">
+              <select id="histStatusFilter" class="form-control">
+                <option value="ALL">All Statuses</option>
+                <option value="Abandoned">Abandoned</option>
+                <option value="Failed">Failed</option>
+                <option value="Successful">Successful</option>
+                <option value="Rejected">Rejected</option>
+              </select>
+            </div>
+            <div class="filter-wrap">
+              <select id="histCategoryFilter" class="form-control">
+                <option value="ALL">All Categories</option>
+                <option value="Product">Product</option>
+                <option value="Engineering">Engineering</option>
+                <option value="Infrastructure">Infrastructure</option>
+                <option value="Business Strategy">Business Strategy</option>
+                <option value="Operations">Operations</option>
+                <option value="Productivity">Productivity</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <!-- Decisions Table -->
+        <div class="panel-box" style="padding: 0; overflow: hidden;">
+          <div class="table-responsive">
+            <table class="data-table" id="decisionsTable">
+              <thead>
+                <tr>
+                  <th style="width: 100px;">ID</th>
+                  <th style="width: 240px;">Title</th>
+                  <th style="width: 130px;">Category</th>
+                  <th style="width: 120px;">Status</th>
+                  <th style="width: 110px;">Date</th>
+                  <th>Summary / Key Lesson Learned</th>
+                  <th style="width: 110px; text-align: right;">Action</th>
+                </tr>
+              </thead>
+              <tbody id="decisionsTableBody">
+                <!-- Populated via /historical-decisions -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Decision Detail Modal -->
+        <div id="decisionModal" class="detail-modal-overlay hidden">
+          <div class="detail-modal-card">
+            <div class="modal-header">
+              <div>
+                <span class="badge-evidence" id="modalDecisionCategory">Product</span>
+                <h3 class="modal-title" id="modalDecisionTitle">Employee Mobile Application</h3>
+                <span class="modal-id" id="modalDecisionId">D001</span> &bull; <span id="modalDecisionDate">2024-03-15</span>
+              </div>
+              <button class="btn-close-modal" id="btnCloseModal">&times;</button>
+            </div>
+            <div class="modal-body">
+              <div class="modal-status-strip">
+                <span>Outcome Status:</span>
+                <span class="status-pill-big" id="modalDecisionStatus">Abandoned</span>
+              </div>
+              <div class="modal-section">
+                <h4>Business Problem</h4>
+                <p id="modalBusinessProblem" class="text-body"></p>
+              </div>
+              <div class="modal-section">
+                <h4>Proposal &amp; Chosen Option</h4>
+                <p id="modalProposal" class="text-body"></p>
+              </div>
+              <div class="modal-section">
+                <h4>Failure Reasons / Blockers</h4>
+                <ul id="modalFailureReasons" class="blocker-item-list danger-bullets"></ul>
+              </div>
+              <div class="modal-section">
+                <h4>Lesson Learned</h4>
+                <div class="lesson-box" id="modalLessonLearned"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- =================================================================== -->
+    <!-- VIEW 5: HOW IT WORKS                                                -->
+    <!-- =================================================================== -->
+    <section id="view-how-it-works" class="page-view hidden">
+      <div class="page-container">
+        <div class="page-title-strip">
+          <div>
+            <h1 class="page-main-title">How Decision Graveyard Works</h1>
+            <p class="page-main-sub">The architecture behind organizational memory recall, ghost detection, and human decision intelligence.</p>
+          </div>
+          <span class="badge-reasoning">Architecture Overview</span>
+        </div>
+
+        <!-- 7-Step Detailed Pipeline -->
+        <div class="panel-box">
+          <div class="box-header">
+            <div>
+              <h2 class="box-title">The 7-Step Organizational Decision Pipeline</h2>
+              <p class="box-subtitle">Every proposal is evaluated systematically against persistent corporate history</p>
+            </div>
+          </div>
+
+          <div class="detailed-pipeline-list">
+            <div class="pipeline-card">
+              <div class="p-num">1</div>
+              <div class="p-content">
+                <h3>Historical decisions are stored in organizational memory</h3>
+                <p>Past successes, failures, abandoned initiatives, and rejected proposals are indexed as structured documents in Hindsight Cloud, preserving lessons, constraints, and outcome drivers.</p>
+              </div>
+            </div>
+
+            <div class="pipeline-card">
+              <div class="p-num">2</div>
+              <div class="p-content">
+                <h3>Hindsight recalls relevant memories</h3>
+                <p>When a Product Manager submits a proposal, the system builds semantic recall queries capturing functional intent, architecture choices, and business problems to retrieve pertinent memories.</p>
+              </div>
+            </div>
+
+            <div class="pipeline-card">
+              <div class="p-num">3</div>
+              <div class="p-content">
+                <h3>The agent compares the current proposal with historical decisions</h3>
+                <p>The DecisionAgent inspects conceptual resemblance, assessing whether the proposal touches problem spaces or technical patterns the organization has explored before.</p>
+              </div>
+            </div>
+
+            <div class="pipeline-card">
+              <div class="p-num">4</div>
+              <div class="p-content">
+                <h3>GhostDetector identifies potential historical overlap</h3>
+                <p>If a proposal directly resembles an abandoned or failed project, GhostDetector flags the match with a qualitative confidence rating and extracts historical blockers.</p>
+              </div>
+            </div>
+
+            <div class="pipeline-card highlight-killer">
+              <div class="p-num">5</div>
+              <div class="p-content">
+                <h3>MultiProposalDetector identifies composite ghosts</h3>
+                <p>Teams often decompose large initiatives into innocent micro-features. MultiProposalDetector evaluates whether separate proposals collectively recreate an abandoned macro-project.</p>
+              </div>
+            </div>
+
+            <div class="pipeline-card">
+              <div class="p-num">6</div>
+              <div class="p-content">
+                <h3>The system compares historical blockers with current conditions</h3>
+                <p>The Then vs. Now audit balances the analysis by isolating blockers that still apply from those that have changed favorably (e.g. mobile adoption growing from 18% to 76%).</p>
+              </div>
+            </div>
+
+            <div class="pipeline-card highlight-pm">
+              <div class="p-num">7</div>
+              <div class="p-content">
+                <h3>The Product Manager makes the final decision</h3>
+                <p>The system is strictly consultative. It equips the Product Manager with probing questions and evidence, leaving the final business judgment in human hands.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tech Stack & Safeguards Box -->
+        <div class="panel-box">
+          <div class="box-header">
+            <div>
+              <h2 class="box-title">Enterprise Architecture &amp; Safeguards</h2>
+              <p class="box-subtitle">Engineered to eliminate hallucinations and support explainability</p>
+            </div>
+          </div>
+          <div class="safeguards-grid">
+            <div class="safeguard-card">
+              <h4>&#128065; Grounded in Real Memory</h4>
+              <p>Hindsight Cloud serves as the external source of truth. The LLM cannot hallucinate prior decisions that do not exist in organizational memory.</p>
+            </div>
+            <div class="safeguard-card">
+              <h4>&#128683; No Fake Similarity Percentages</h4>
+              <p>Avoids misleading numeric scores (e.g. "84.7% similar"). Instead, relies on qualitative confidence tiers (High, Medium, Low) backed by explicit conceptual reasoning.</p>
+            </div>
+            <div class="safeguard-card">
+              <h4>&#9878; Purely Consultative Standard</h4>
+              <p>The agent never issues imperative commands like "Reject this proposal." It highlights risk persistence and asks probing questions.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Global Footer -->
+  <footer class="app-footer">
+    <div class="footer-container">
+      <div class="footer-left">
+        <strong>Decision Graveyard</strong> &bull; AI-Powered Organizational Decision Intelligence
+      </div>
+      <div class="footer-right">
+        <span>Powered by Hindsight Cloud &amp; Gemini 2.5 Flash &bull; Built for Product Leadership</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Advisory Intelligence Modal -->
+  <div id="advisoryModal" class="detail-modal-overlay hidden" role="dialog" aria-modal="true" aria-labelledby="advisoryModalTitle" onclick="if (event.target === this && window.setAdvisoryModalState) window.setAdvisoryModalState(false)">
+    <div class="detail-modal-card advisory-modal-card">
+      <div class="modal-header">
+        <div>
+          <span class="badge-consultative">CONSULTATIVE STANDARD</span>
+          <h2 class="modal-title" id="advisoryModalTitle">Advisory Intelligence</h2>
+          <span class="modal-id">Organizational Memory &bull; Human-in-the-Loop</span>
+        </div>
+        <button type="button" class="btn-close-modal" id="btnCloseAdvisoryModal" aria-label="Close modal" onclick="window.setAdvisoryModalState && window.setAdvisoryModalState(false)">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="advisory-intro-box">
+          <p class="advisory-intro-text">
+            Decision Graveyard provides evidence and reasoning to help Product Managers evaluate new proposals against organizational memory. It does not automatically approve or reject proposals.
+          </p>
+        </div>
+
+        <div class="advisory-pillars-grid">
+          <!-- Section 1: HINDSIGHT MEMORY -->
+          <div class="advisory-pillar-card">
+            <div class="pillar-header">
+              <span class="pillar-num">1</span>
+              <span class="pillar-icon">&#129504;</span>
+              <h3 class="pillar-title">Hindsight Memory</h3>
+            </div>
+            <p class="pillar-desc">
+              Recalls relevant historical organizational decisions and lessons.
+            </p>
+          </div>
+
+          <!-- Section 2: GHOST DETECTION -->
+          <div class="advisory-pillar-card">
+            <div class="pillar-header">
+              <span class="pillar-num">2</span>
+              <span class="pillar-icon">&#128123;</span>
+              <h3 class="pillar-title">Ghost Detection</h3>
+            </div>
+            <p class="pillar-desc">
+              Identifies when a current proposal may resemble a previously attempted organizational decision.
+            </p>
+          </div>
+
+          <!-- Section 3: COMPOSITE GHOST DETECTION -->
+          <div class="advisory-pillar-card">
+            <div class="pillar-header">
+              <span class="pillar-num">3</span>
+              <span class="pillar-icon">&#129513;</span>
+              <h3 class="pillar-title">Composite Ghost Detection</h3>
+            </div>
+            <p class="pillar-desc">
+              Identifies when multiple smaller proposals may collectively recreate a previously rejected or abandoned initiative.
+            </p>
+          </div>
+
+          <!-- Section 4: HUMAN DECISION -->
+          <div class="advisory-pillar-card highlight-pillar">
+            <div class="pillar-header">
+              <span class="pillar-num">4</span>
+              <span class="pillar-icon">&#9878;</span>
+              <h3 class="pillar-title">Human Decision</h3>
+            </div>
+            <p class="pillar-desc">
+              The Product Manager remains responsible for the final decision.
+            </p>
+          </div>
+        </div>
+
+        <div class="modal-footer-action">
+          <button type="button" class="btn-primary" id="btnDismissAdvisoryModal" onclick="window.setAdvisoryModalState && window.setAdvisoryModalState(false)">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      var advisoryOpen = false;
+      window.setAdvisoryModalState = function (isOpen) {
+        advisoryOpen = Boolean(isOpen);
+        var modal = document.getElementById("advisoryModal");
+        if (!modal) return;
+        if (advisoryOpen) {
+          modal.classList.remove("hidden");
+          modal.style.display = "flex";
+        } else {
+          modal.classList.add("hidden");
+          modal.style.display = "none";
+        }
+      };
+
+      window.addEventListener("keydown", function (e) {
+        if (e.key === "Escape" && advisoryOpen) {
+          window.setAdvisoryModalState(false);
+        }
+      });
+    })();
+  </script>
+  <script src="/static/app.js?v=9.2.3"></script>
+</body>
+</html>
