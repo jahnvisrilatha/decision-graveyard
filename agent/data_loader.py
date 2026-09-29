@@ -1,6 +1,6 @@
 """Data loader module for Decision Graveyard.
 
-Loads and validates data from:
+Loads & validates data from:
 - data/company_context.json
 - data/current_proposals.json
 - data/historical_decisions.json
