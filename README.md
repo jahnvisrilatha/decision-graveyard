@@ -322,6 +322,23 @@ decision-graveyard
 The ingestion process is designed to be idempotent, so historical decisions can be safely seeded without intentionally creating duplicate memory records.
 
 ---
+## Setup Checklist
+
+Before starting the application, make sure you have completed the following:
+
+- [ ] Python 3.10 or later is installed.
+- [ ] The repository has been cloned locally.
+- [ ] A Python virtual environment has been created and activated.
+- [ ] Project dependencies have been installed using `requirements.txt`.
+- [ ] A `.env` file has been created from `.env.example`.
+- [ ] Valid Gemini and Hindsight API credentials have been configured.
+- [ ] Historical decisions have been seeded into Hindsight.
+- [ ] The FastAPI backend is ready to start.
+
+Once these steps are complete, start the backend using:
+
+```powershell
+python -m uvicorn api.main:app --reload
 
 ## Run
 
