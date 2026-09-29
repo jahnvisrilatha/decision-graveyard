@@ -1,17 +1,26 @@
-"""Hindsight Memory Integration for Decision Graveyard.
+"""Hindsight memory integration for Decision Graveyard.
 
-Provides a persistent memory layer using the official hindsight-client:
-1. Creating/connecting to a Hindsight memory bank.
-2. Retaining organizational decision memories with rich context and metadata.
-3. Recalling relevant memories for current proposals.
-4. Reflecting on organizational patterns for deeper synthesis.
+This module provides a persistent memory layer for organizational
+decisions using the official Hindsight client.
 
-Configuration is loaded from environment variables:
-- HINDSIGHT_API_KEY
-- HINDSIGHT_BASE_URL
-- HINDSIGHT_BANK_ID
+Responsibilities:
+    - Connect to or create a Hindsight memory bank.
+    - Store historical decisions with context and metadata.
+    - Retrieve relevant memories for new proposals.
+    - Reflect on stored memories to identify organizational patterns.
 
-Never hardcodes API keys.
+Configuration:
+    HINDSIGHT_API_KEY:
+        API key used to authenticate with Hindsight.
+    HINDSIGHT_BASE_URL:
+        Base URL of the Hindsight service.
+    HINDSIGHT_BANK_ID:
+        Identifier of the Hindsight memory bank.
+
+Environment variables are loaded from the project's .env file.
+
+Security:
+    API credentials must never be hardcoded in source code.
 """
 
 import asyncio
@@ -54,7 +63,7 @@ class _HindsightLoopRunner:
         self._thread = threading.Thread(target=self._run_loop, daemon=True, name="HindsightAsyncRunner")
         self._thread.start()
 
-    def _run_loop(self):
+    def _run_loop(self) -> None:
         asyncio.set_event_loop(self._loop)
         self._loop.run_forever()
 
