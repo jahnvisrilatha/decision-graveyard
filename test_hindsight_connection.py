@@ -20,7 +20,7 @@ if hasattr(sys.stdout, "reconfigure"):
     except Exception:
         pass
 
-# Ensure current directory is on sys.path
+# Ensure the current project directory is available on sys.path
 sys.path.insert(0, os.path.abspath(os.path.dirname(__file__)))
 
 TEST_MEMORY_CONTENT = (
